@@ -18,18 +18,17 @@ for (const link of links){
 }
 
 /* detectar scroll e etc */
-
-const header = document.querySelector("#header")
-const navHeight = header.offsetHeight;
-
-window.addEventListener('scroll', function(){
+function changeHeaderWhenScroll(){
+    const header = document.querySelector("#header")
+    const navHeight = header.offsetHeight;
     if(window.scrollY>= navHeight){
         header.classList.add('scroll')
     }
     else{
         header.classList.remove('scroll')
     }
-})
+}
+
 
 // TESTIMONIALS SLIDER/CARROSEL
 const swiper = new Swiper('.swiper-container',{
@@ -53,5 +52,25 @@ scrollReveal.reveal(`#home .image, #home .text,
 #about .image, #about .text
 #services header, #services .card,
 #testimonials header, #testimonials .testimonials
-#contact .text, #contact .links`, 
+#contact .text, #contact .links,
+footer .brand, footer .social`, 
 {interval:100})
+
+
+// BACK TO TOP
+function backToTop() {
+    const backToTopButton = document.querySelector('.back-to-top')
+    if(this.window.scrollY >= 560) {
+        backToTopButton.classList.add('show')
+    }
+    else{
+        backToTopButton.classList.remove('show')
+    }
+}
+
+
+// Agrupado de functions
+window.addEventListener('scroll', function(){
+  backToTop()
+  changeHeaderWhenScroll()
+})

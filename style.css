@@ -33,6 +33,13 @@ img{
   --text-color: hsl(0 0% 46%);
   --text-color-light: hsl(0 0% 98%);
   --body-color: hsl(0 0% 98%);
+
+  /* fonts */
+  --title-font-size:1.875rem;
+  --subtitle-font-size: 1rem;
+
+  --title-font: 'Poppins', sans-serif;
+  --body-font: "DM Sans", sans-serif;
 }
 /* ===================================== base ========================================== */
 html {
@@ -40,14 +47,14 @@ html {
 }
 
 body{
-    font: 400 1rem "DM Sans", sans-serif;
+    font: 400 1rem var(--body-font);
     color: var(--text-color);
     background: var(--body-color);
     -webkit-font-smoothing: antialiased;
 }
 
 .title{
-    font: 700 1.875rem 'Poppins', sans-serif;
+    font: 700 var(--title-font-size) var(--title-font);
     color: var(--title-color);
     -webkit-font-smoothing: auto;
 }
@@ -60,7 +67,7 @@ body{
     align-items: center;
     padding: 0 2rem;
     border-radius: 0.25rem;
-    font: 500 1rem 'DM Sans', sans-serif;
+    font: 500 1rem var(--body-font);
     transition: background 0.3s;
 }
 
@@ -98,11 +105,15 @@ body{
 }
 
 .section {
-    padding: 5rem 0;
+    padding: calc(5rem + var(--header-height)) 0;
 }
 
 .section .title{
     margin-bottom: 1rem;
+}
+
+.section .subtitle {
+    font-size: var(--subtitle-font-size);
 }
 
 .section header{
@@ -129,13 +140,11 @@ body{
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
 }
 
-main{
-    margin-top: calc(var(--header-height) + 2rem);
-}
+
 
 /* ================================== logo ========================================= */
 .logo{
-    font: 700 1.31rem 'Poppins', sans-serif;
+    font: 700 1.31rem var(--title-font);
     color: var(--title-color);
 }
 
@@ -143,7 +152,9 @@ main{
     color: var(--base-color);
 }
 
-
+.logo-alt span{
+    color: var(--body-color);
+}
 /* ================================== navigation ========================================= */
 nav{
     height: var(--header-height);
@@ -447,3 +458,111 @@ nav.show div.icon-close {
 #contact ul li i{
     color: var(--base-color);
 }
+
+/* ============================= FOOTER ========================== */
+
+footer{
+    background: var(--base-color);
+}
+
+footer.section{
+    padding: 4rem 0;
+}
+
+footer .logo{
+    display: inline-block; /* Tem que trocar pois display padrão é inline */
+    margin-bottom: 1.5rem;
+}
+
+footer .brand p{
+    color: var(--text-color-light);
+    margin-bottom: 0.75rem;
+}
+
+footer i{
+    font-size: 1.5rem;
+    color: var(--text-color-light);
+}
+
+footer .social{
+    grid-auto-flow: column;
+    width: fit-content;
+}
+
+footer .social a{
+    transition: 0.3s;
+    display: inline-block; /* trocando display inline para inline block se não não recebe a funcionalidade transition e transform */
+}
+
+footer .social a:hover{
+    transform: translateY(-8px);
+}
+
+.back-to-top{
+    background: var(--base-color);
+    color: var(--text-color-light);
+
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+
+    padding: 0.5rem;
+    clip-path: circle();
+
+    font-size: 1.5rem;
+    line-height: 0;
+
+    visibility: hidden;
+    opacity: 0;
+
+    transition: 0.3s;
+    transform: translateY(100%); /* transform para mexer os 2 transform se conectam */
+}
+
+.back-to-top.show{
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0); /* transform para mexer os 2 transform se conectam */
+}
+
+/* responsivo */
+/* extra large devices: 1200 > */
+@media(min-width: 1200px){
+    .section{
+        padding: 10rem 0;
+    }
+
+    nav .menu{
+        opacity: 1;
+        visibility: visible;
+        top: 0;
+    }
+
+    nav .menu ul{
+        display: flex;
+        gap: 2rem;
+    }
+
+    nav .menu ul li a.title{
+        font: 400 1rem var(--body-font);
+    }
+
+    nav .icon-menu{
+        display: none;
+    }
+
+    main{
+        margin-top: var(--header-height);
+    }
+
+}
+/* large devices: 1023 > */
+/* large devices: 992 > */
+@media (min-width: 992px) {
+    :root {
+        --title-font-size: 2.25rem;
+        --subtitle-font-size: 1.125rem;
+    }
+
+}
+/* medium devices: 767 > */
