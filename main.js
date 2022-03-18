@@ -18,9 +18,9 @@ for (const link of links){
 }
 
 /* detectar scroll e etc */
+const header = document.querySelector("#header")
+const navHeight = header.offsetHeight;
 function changeHeaderWhenScroll(){
-    const header = document.querySelector("#header")
-    const navHeight = header.offsetHeight;
     if(window.scrollY>= navHeight){
         header.classList.add('scroll')
     }
@@ -32,12 +32,18 @@ function changeHeaderWhenScroll(){
 
 // TESTIMONIALS SLIDER/CARROSEL
 const swiper = new Swiper('.swiper-container',{
-    slidesPewView: 1,
+    slidesPerView: 1,
     pagination: {
         el: '.swiper-pagination'
     },
     mousewheel: true,
     keyboard: true,
+    breakpoints: {
+        767:{
+            slidesPerView: 2,
+            setWrapperSize: true
+        }
+    }
 })
 
 // SCROLL REVEAL
@@ -58,9 +64,9 @@ footer .brand, footer .social`,
 
 
 // BACK TO TOP
+const backToTopButton = document.querySelector('.back-to-top')
 function backToTop() {
-    const backToTopButton = document.querySelector('.back-to-top')
-    if(this.window.scrollY >= 560) {
+    if(window.scrollY >= 560) {
         backToTopButton.classList.add('show')
     }
     else{
@@ -69,8 +75,35 @@ function backToTop() {
 }
 
 
+// menu ativo dependendo de onde esteja na pág
+const sections = document.querySelectorAll('main section[id]') // pega todas as sections que contém um atributo id
+function activateMenuAtCurrentSection() {
+  const checkpoint = window.pageYOffset + (window.innerHeight / 8) * 4
+
+  for (const section of sections) {
+    const sectionTop = section.offsetTop
+    const sectionHeight = section.offsetHeight
+    const sectionId = section.getAttribute('id')
+
+    const checkpointStart = checkpoint >= sectionTop
+    const checkpointEnd = checkpoint <= sectionTop + sectionHeight
+
+    if (checkpointStart && checkpointEnd) {
+      document
+        .querySelector('nav ul li a[href*=' + sectionId + ']')
+        .classList.add('active')
+    } else {
+      document
+        .querySelector('nav ul li a[href*=' + sectionId + ']')
+        .classList.remove('active')
+    }
+  }
+}
+
 // Agrupado de functions
 window.addEventListener('scroll', function(){
   backToTop()
   changeHeaderWhenScroll()
+  activateMenuAtCurrentSection()
 })
+
