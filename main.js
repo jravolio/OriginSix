@@ -100,6 +100,15 @@ function activateMenuAtCurrentSection() {
   }
 }
 
+// HOVER NOS CARDS / hover no css
+
+var cardSelected = document.querySelectorAll('.card')
+for(const card of cardSelected){
+    card.addEventListener('mouseover', function(){
+        card.setAttribute('style', 'background-color:white')
+    })}
+
+
 // Agrupado de functions
 window.addEventListener('scroll', function(){
   backToTop()

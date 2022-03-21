@@ -354,6 +354,12 @@ nav.show div.icon-close {
     border-bottom: 0.25rem solid var(--base-color);
     border-radius: 0.25rem 0.25rem 0 0;
     text-align: center;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.card:hover{
+    transform: scale(1.1)
 }
 
 .card i {
